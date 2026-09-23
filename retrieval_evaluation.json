@@ -1,0 +1,324 @@
+[
+  {
+    "question_id": 1,
+    "question": "What architecture does the Transformer use?",
+    "method": "Dense",
+    "expected_papers": [
+      "data1"
+    ],
+    "retrieved_papers": [
+      "data1",
+      "data1",
+      "data2"
+    ],
+    "hit_at_1": 1,
+    "hit_at_3": 1,
+    "reciprocal_rank": 1.0
+  },
+  {
+    "question_id": 1,
+    "question": "What architecture does the Transformer use?",
+    "method": "BM25",
+    "expected_papers": [
+      "data1"
+    ],
+    "retrieved_papers": [
+      "data5",
+      "data1",
+      "data2"
+    ],
+    "hit_at_1": 0,
+    "hit_at_3": 1,
+    "reciprocal_rank": 0.5
+  },
+  {
+    "question_id": 2,
+    "question": "How does BERT perform pre-training?",
+    "method": "Dense",
+    "expected_papers": [
+      "data2"
+    ],
+    "retrieved_papers": [
+      "data2",
+      "data2",
+      "data2"
+    ],
+    "hit_at_1": 1,
+    "hit_at_3": 1,
+    "reciprocal_rank": 1.0
+  },
+  {
+    "question_id": 2,
+    "question": "How does BERT perform pre-training?",
+    "method": "BM25",
+    "expected_papers": [
+      "data2"
+    ],
+    "retrieved_papers": [
+      "data2",
+      "data2",
+      "data2"
+    ],
+    "hit_at_1": 1,
+    "hit_at_3": 1,
+    "reciprocal_rank": 1.0
+  },
+  {
+    "question_id": 3,
+    "question": "What is Retrieval-Augmented Generation?",
+    "method": "Dense",
+    "expected_papers": [
+      "data3",
+      "data9"
+    ],
+    "retrieved_papers": [
+      "data9",
+      "data9",
+      "data9"
+    ],
+    "hit_at_1": 1,
+    "hit_at_3": 1,
+    "reciprocal_rank": 1.0
+  },
+  {
+    "question_id": 3,
+    "question": "What is Retrieval-Augmented Generation?",
+    "method": "BM25",
+    "expected_papers": [
+      "data3",
+      "data9"
+    ],
+    "retrieved_papers": [
+      "data4",
+      "data7",
+      "data4"
+    ],
+    "hit_at_1": 0,
+    "hit_at_3": 0,
+    "reciprocal_rank": 0.0
+  },
+  {
+    "question_id": 4,
+    "question": "How does LoRA reduce the number of trainable parameters?",
+    "method": "Dense",
+    "expected_papers": [
+      "data5"
+    ],
+    "retrieved_papers": [
+      "data5",
+      "data5",
+      "data5"
+    ],
+    "hit_at_1": 1,
+    "hit_at_3": 1,
+    "reciprocal_rank": 1.0
+  },
+  {
+    "question_id": 4,
+    "question": "How does LoRA reduce the number of trainable parameters?",
+    "method": "BM25",
+    "expected_papers": [
+      "data5"
+    ],
+    "retrieved_papers": [
+      "data5",
+      "data5",
+      "data5"
+    ],
+    "hit_at_1": 1,
+    "hit_at_3": 1,
+    "reciprocal_rank": 1.0
+  },
+  {
+    "question_id": 5,
+    "question": "What is Chain-of-Thought prompting?",
+    "method": "Dense",
+    "expected_papers": [
+      "data6"
+    ],
+    "retrieved_papers": [
+      "data6",
+      "data6",
+      "data6"
+    ],
+    "hit_at_1": 1,
+    "hit_at_3": 1,
+    "reciprocal_rank": 1.0
+  },
+  {
+    "question_id": 5,
+    "question": "What is Chain-of-Thought prompting?",
+    "method": "BM25",
+    "expected_papers": [
+      "data6"
+    ],
+    "retrieved_papers": [
+      "data6",
+      "data6",
+      "data4"
+    ],
+    "hit_at_1": 1,
+    "hit_at_3": 1,
+    "reciprocal_rank": 1.0
+  },
+  {
+    "question_id": 6,
+    "question": "How is RLHF used to train language models?",
+    "method": "Dense",
+    "expected_papers": [
+      "data7"
+    ],
+    "retrieved_papers": [
+      "data7",
+      "data7",
+      "data7"
+    ],
+    "hit_at_1": 1,
+    "hit_at_3": 1,
+    "reciprocal_rank": 1.0
+  },
+  {
+    "question_id": 6,
+    "question": "How is RLHF used to train language models?",
+    "method": "BM25",
+    "expected_papers": [
+      "data7"
+    ],
+    "retrieved_papers": [
+      "data7",
+      "data7",
+      "data7"
+    ],
+    "hit_at_1": 1,
+    "hit_at_3": 1,
+    "reciprocal_rank": 1.0
+  },
+  {
+    "question_id": 7,
+    "question": "What is SELF-RAG?",
+    "method": "Dense",
+    "expected_papers": [
+      "data9"
+    ],
+    "retrieved_papers": [
+      "data9",
+      "data9",
+      "data9"
+    ],
+    "hit_at_1": 1,
+    "hit_at_3": 1,
+    "reciprocal_rank": 1.0
+  },
+  {
+    "question_id": 7,
+    "question": "What is SELF-RAG?",
+    "method": "BM25",
+    "expected_papers": [
+      "data9"
+    ],
+    "retrieved_papers": [
+      "data4",
+      "data7",
+      "data4"
+    ],
+    "hit_at_1": 0,
+    "hit_at_3": 0,
+    "reciprocal_rank": 0.0
+  },
+  {
+    "question_id": 8,
+    "question": "What is the main idea behind LLaMA?",
+    "method": "Dense",
+    "expected_papers": [
+      "data8"
+    ],
+    "retrieved_papers": [
+      "data8",
+      "data8",
+      "data8"
+    ],
+    "hit_at_1": 1,
+    "hit_at_3": 1,
+    "reciprocal_rank": 1.0
+  },
+  {
+    "question_id": 8,
+    "question": "What is the main idea behind LLaMA?",
+    "method": "BM25",
+    "expected_papers": [
+      "data8"
+    ],
+    "retrieved_papers": [
+      "data7",
+      "data6",
+      "data4"
+    ],
+    "hit_at_1": 0,
+    "hit_at_3": 0,
+    "reciprocal_rank": 0.0
+  },
+  {
+    "question_id": 9,
+    "question": "What is the GPT-3 model capable of doing with few-shot learning?",
+    "method": "Dense",
+    "expected_papers": [
+      "data4"
+    ],
+    "retrieved_papers": [
+      "data4",
+      "data4",
+      "data4"
+    ],
+    "hit_at_1": 1,
+    "hit_at_3": 1,
+    "reciprocal_rank": 1.0
+  },
+  {
+    "question_id": 9,
+    "question": "What is the GPT-3 model capable of doing with few-shot learning?",
+    "method": "BM25",
+    "expected_papers": [
+      "data4"
+    ],
+    "retrieved_papers": [
+      "data6",
+      "data4",
+      "data4"
+    ],
+    "hit_at_1": 0,
+    "hit_at_3": 1,
+    "reciprocal_rank": 0.5
+  },
+  {
+    "question_id": 10,
+    "question": "Why does BERT use bidirectional representations?",
+    "method": "Dense",
+    "expected_papers": [
+      "data2"
+    ],
+    "retrieved_papers": [
+      "data2",
+      "data2",
+      "data2"
+    ],
+    "hit_at_1": 1,
+    "hit_at_3": 1,
+    "reciprocal_rank": 1.0
+  },
+  {
+    "question_id": 10,
+    "question": "Why does BERT use bidirectional representations?",
+    "method": "BM25",
+    "expected_papers": [
+      "data2"
+    ],
+    "retrieved_papers": [
+      "data2",
+      "data2",
+      "data2"
+    ],
+    "hit_at_1": 1,
+    "hit_at_3": 1,
+    "reciprocal_rank": 1.0
+  }
+]

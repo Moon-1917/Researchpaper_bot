@@ -1,0 +1,436 @@
+{
+  "configuration": {
+    "embedding_model": "BAAI/bge-m3",
+    "reranker_model": "BAAI/bge-reranker-v2-m3",
+    "candidate_k": 10,
+    "top_k": 3
+  },
+  "metrics": {
+    "Hit@1": 1.0,
+    "Hit@3": 1.0,
+    "MRR": 1.0
+  },
+  "detailed_results": [
+    {
+      "question_id": 1,
+      "question": "What architecture does the Transformer use?",
+      "expected_papers": [
+        "data1"
+      ],
+      "results": [
+        {
+          "metadata": {
+            "page": 3,
+            "paper_id": "data1",
+            "source": "data1.pdf",
+            "paper_title": "Attention Is All You Need",
+            "chunk_id": "data1_p3_c1"
+          },
+          "score": 0.9955033659934998
+        },
+        {
+          "metadata": {
+            "paper_title": "Attention Is All You Need",
+            "paper_id": "data1",
+            "source": "data1.pdf",
+            "chunk_id": "data1_p2_c2",
+            "page": 2
+          },
+          "score": 0.9512066841125488
+        },
+        {
+          "metadata": {
+            "chunk_id": "data1_p10_c2",
+            "paper_title": "Attention Is All You Need",
+            "source": "data1.pdf",
+            "paper_id": "data1",
+            "page": 10
+          },
+          "score": 0.919269859790802
+        }
+      ],
+      "hit_at_1": 1.0,
+      "hit_at_3": 1.0,
+      "mrr": 1.0
+    },
+    {
+      "question_id": 2,
+      "question": "How does BERT perform pre-training?",
+      "expected_papers": [
+        "data2"
+      ],
+      "results": [
+        {
+          "metadata": {
+            "paper_title": "BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding",
+            "page": 1,
+            "paper_id": "data2",
+            "source": "data2.pdf",
+            "chunk_id": "data2_p1_c1"
+          },
+          "score": 0.9862906336784363
+        },
+        {
+          "metadata": {
+            "source": "data2.pdf",
+            "paper_title": "BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding",
+            "paper_id": "data2",
+            "chunk_id": "data2_p3_c2",
+            "page": 3
+          },
+          "score": 0.9331039190292358
+        },
+        {
+          "metadata": {
+            "paper_id": "data2",
+            "paper_title": "BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding",
+            "chunk_id": "data2_p3_c3",
+            "source": "data2.pdf",
+            "page": 3
+          },
+          "score": 0.9307991862297058
+        }
+      ],
+      "hit_at_1": 1.0,
+      "hit_at_3": 1.0,
+      "mrr": 1.0
+    },
+    {
+      "question_id": 3,
+      "question": "What is Retrieval-Augmented Generation?",
+      "expected_papers": [
+        "data3",
+        "data9"
+      ],
+      "results": [
+        {
+          "metadata": {
+            "page": 1,
+            "paper_id": "data9",
+            "source": "data9.pdf",
+            "chunk_id": "data9_p1_c1",
+            "paper_title": "SELF-RAG: Learning to Retrieve, Generate, and Critique through Self-Reflection"
+          },
+          "score": 0.9975228905677795
+        },
+        {
+          "metadata": {
+            "page": 3,
+            "chunk_id": "data9_p3_c5",
+            "source": "data9.pdf",
+            "paper_id": "data9",
+            "paper_title": "SELF-RAG: Learning to Retrieve, Generate, and Critique through Self-Reflection"
+          },
+          "score": 0.9812146425247192
+        },
+        {
+          "metadata": {
+            "paper_title": "SELF-RAG: Learning to Retrieve, Generate, and Critique through Self-Reflection",
+            "source": "data9.pdf",
+            "chunk_id": "data9_p1_c2",
+            "paper_id": "data9",
+            "page": 1
+          },
+          "score": 0.975637674331665
+        }
+      ],
+      "hit_at_1": 1.0,
+      "hit_at_3": 1.0,
+      "mrr": 1.0
+    },
+    {
+      "question_id": 4,
+      "question": "How does LoRA reduce the number of trainable parameters?",
+      "expected_papers": [
+        "data5"
+      ],
+      "results": [
+        {
+          "metadata": {
+            "paper_title": "LoRA: Low-Rank Adaptation of Large Language Models",
+            "chunk_id": "data5_p1_c2",
+            "page": 1,
+            "paper_id": "data5",
+            "source": "data5.pdf"
+          },
+          "score": 0.9967659711837769
+        },
+        {
+          "metadata": {
+            "paper_title": "LoRA: Low-Rank Adaptation of Large Language Models",
+            "source": "data5.pdf",
+            "chunk_id": "data5_p1_c1",
+            "page": 1,
+            "paper_id": "data5"
+          },
+          "score": 0.9921051263809204
+        },
+        {
+          "metadata": {
+            "paper_id": "data5",
+            "chunk_id": "data5_p5_c1",
+            "source": "data5.pdf",
+            "paper_title": "LoRA: Low-Rank Adaptation of Large Language Models",
+            "page": 5
+          },
+          "score": 0.9761669635772705
+        }
+      ],
+      "hit_at_1": 1.0,
+      "hit_at_3": 1.0,
+      "mrr": 1.0
+    },
+    {
+      "question_id": 5,
+      "question": "What is Chain-of-Thought prompting?",
+      "expected_papers": [
+        "data6"
+      ],
+      "results": [
+        {
+          "metadata": {
+            "source": "data6.pdf",
+            "paper_title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+            "chunk_id": "data6_p2_c4",
+            "paper_id": "data6",
+            "page": 2
+          },
+          "score": 0.9984816908836365
+        },
+        {
+          "metadata": {
+            "paper_title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+            "chunk_id": "data6_p24_c1",
+            "page": 24,
+            "source": "data6.pdf",
+            "paper_id": "data6"
+          },
+          "score": 0.9968469738960266
+        },
+        {
+          "metadata": {
+            "source": "data6.pdf",
+            "paper_title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+            "page": 22,
+            "chunk_id": "data6_p22_c1",
+            "paper_id": "data6"
+          },
+          "score": 0.9964009523391724
+        }
+      ],
+      "hit_at_1": 1.0,
+      "hit_at_3": 1.0,
+      "mrr": 1.0
+    },
+    {
+      "question_id": 6,
+      "question": "How is RLHF used to train language models?",
+      "expected_papers": [
+        "data7"
+      ],
+      "results": [
+        {
+          "metadata": {
+            "source": "data7.pdf",
+            "page": 4,
+            "chunk_id": "data7_p4_c5",
+            "paper_id": "data7",
+            "paper_title": "Training Language Models to Follow Instructions with Human Feedback"
+          },
+          "score": 0.964607834815979
+        },
+        {
+          "metadata": {
+            "chunk_id": "data7_p2_c3",
+            "source": "data7.pdf",
+            "paper_title": "Training Language Models to Follow Instructions with Human Feedback",
+            "paper_id": "data7",
+            "page": 2
+          },
+          "score": 0.9546825885772705
+        },
+        {
+          "metadata": {
+            "paper_title": "Training Language Models to Follow Instructions with Human Feedback",
+            "page": 5,
+            "source": "data7.pdf",
+            "chunk_id": "data7_p5_c1",
+            "paper_id": "data7"
+          },
+          "score": 0.8785495162010193
+        }
+      ],
+      "hit_at_1": 1.0,
+      "hit_at_3": 1.0,
+      "mrr": 1.0
+    },
+    {
+      "question_id": 7,
+      "question": "What is SELF-RAG?",
+      "expected_papers": [
+        "data9"
+      ],
+      "results": [
+        {
+          "metadata": {
+            "paper_title": "SELF-RAG: Learning to Retrieve, Generate, and Critique through Self-Reflection",
+            "source": "data9.pdf",
+            "page": 3,
+            "chunk_id": "data9_p3_c5",
+            "paper_id": "data9"
+          },
+          "score": 0.9932844638824463
+        },
+        {
+          "metadata": {
+            "source": "data9.pdf",
+            "page": 1,
+            "paper_id": "data9",
+            "chunk_id": "data9_p1_c2",
+            "paper_title": "SELF-RAG: Learning to Retrieve, Generate, and Critique through Self-Reflection"
+          },
+          "score": 0.9797670841217041
+        },
+        {
+          "metadata": {
+            "source": "data9.pdf",
+            "chunk_id": "data9_p1_c1",
+            "paper_title": "SELF-RAG: Learning to Retrieve, Generate, and Critique through Self-Reflection",
+            "paper_id": "data9",
+            "page": 1
+          },
+          "score": 0.9563112258911133
+        }
+      ],
+      "hit_at_1": 1.0,
+      "hit_at_3": 1.0,
+      "mrr": 1.0
+    },
+    {
+      "question_id": 8,
+      "question": "What is the main idea behind LLaMA?",
+      "expected_papers": [
+        "data8"
+      ],
+      "results": [
+        {
+          "metadata": {
+            "chunk_id": "data8_p1_c4",
+            "paper_title": "LLaMA: Open and Efficient Foundation Language Models",
+            "page": 1,
+            "source": "data8.pdf",
+            "paper_id": "data8"
+          },
+          "score": 0.42644283175468445
+        },
+        {
+          "metadata": {
+            "paper_id": "data8",
+            "page": 1,
+            "paper_title": "LLaMA: Open and Efficient Foundation Language Models",
+            "source": "data8.pdf",
+            "chunk_id": "data8_p1_c3"
+          },
+          "score": 0.4142119884490967
+        },
+        {
+          "metadata": {
+            "paper_id": "data8",
+            "source": "data8.pdf",
+            "paper_title": "LLaMA: Open and Efficient Foundation Language Models",
+            "page": 1,
+            "chunk_id": "data8_p1_c1"
+          },
+          "score": 0.3797976076602936
+        }
+      ],
+      "hit_at_1": 1.0,
+      "hit_at_3": 1.0,
+      "mrr": 1.0
+    },
+    {
+      "question_id": 9,
+      "question": "What is the GPT-3 model capable of doing with few-shot learning?",
+      "expected_papers": [
+        "data4"
+      ],
+      "results": [
+        {
+          "metadata": {
+            "chunk_id": "data4_p5_c4",
+            "source": "data4.pdf",
+            "paper_id": "data4",
+            "paper_title": "Language Models are Few-Shot Learners",
+            "page": 5
+          },
+          "score": 0.9925411939620972
+        },
+        {
+          "metadata": {
+            "page": 29,
+            "paper_id": "data4",
+            "paper_title": "Language Models are Few-Shot Learners",
+            "source": "data4.pdf",
+            "chunk_id": "data4_p29_c4"
+          },
+          "score": 0.9428689479827881
+        },
+        {
+          "metadata": {
+            "paper_title": "Language Models are Few-Shot Learners",
+            "paper_id": "data4",
+            "source": "data4.pdf",
+            "chunk_id": "data4_p5_c3",
+            "page": 5
+          },
+          "score": 0.9242680668830872
+        }
+      ],
+      "hit_at_1": 1.0,
+      "hit_at_3": 1.0,
+      "mrr": 1.0
+    },
+    {
+      "question_id": 10,
+      "question": "Why does BERT use bidirectional representations?",
+      "expected_papers": [
+        "data2"
+      ],
+      "results": [
+        {
+          "metadata": {
+            "chunk_id": "data2_p1_c1",
+            "paper_title": "BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding",
+            "page": 1,
+            "source": "data2.pdf",
+            "paper_id": "data2"
+          },
+          "score": 0.9785294532775879
+        },
+        {
+          "metadata": {
+            "paper_title": "BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding",
+            "source": "data2.pdf",
+            "paper_id": "data2",
+            "page": 2,
+            "chunk_id": "data2_p2_c1"
+          },
+          "score": 0.9738929867744446
+        },
+        {
+          "metadata": {
+            "paper_title": "BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding",
+            "paper_id": "data2",
+            "chunk_id": "data2_p1_c5",
+            "source": "data2.pdf",
+            "page": 1
+          },
+          "score": 0.9581252336502075
+        }
+      ],
+      "hit_at_1": 1.0,
+      "hit_at_3": 1.0,
+      "mrr": 1.0
+    }
+  ]
+}

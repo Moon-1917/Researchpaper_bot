@@ -1,0 +1,643 @@
+{
+  "evaluation_type": "Manual answer-quality evaluation",
+  "scale": {
+    "1": "Incorrect / major issue",
+    "2": "Poor",
+    "3": "Moderate",
+    "4": "Good / minor issue",
+    "5": "Excellent"
+  },
+  "dimensions": {
+    "relevance": "Does the answer directly address the question?",
+    "accuracy_completeness": "Are the claims accurate and sufficiently complete for the question?",
+    "groundedness": "Are the answer's claims supported by the retrieved research-paper passages?",
+    "citation_source_quality": "Are the cited paper/page sources appropriate and sufficient for the answer?"
+  },
+  "summary": {
+    "num_questions": 10,
+    "metrics": {
+      "relevance": {
+        "average_score": 5.0,
+        "percentage": 100.0,
+        "max_score": 5
+      },
+      "accuracy_completeness": {
+        "average_score": 4.8,
+        "percentage": 96.0,
+        "max_score": 5
+      },
+      "groundedness": {
+        "average_score": 5.0,
+        "percentage": 100.0,
+        "max_score": 5
+      },
+      "citation_source_quality": {
+        "average_score": 4.8,
+        "percentage": 96.0,
+        "max_score": 5
+      }
+    },
+    "overall_average_score": 4.9,
+    "overall_percentage": 98.0,
+    "questions_with_full_expected_paper_coverage": 9,
+    "expected_paper_coverage_percentage": 90.0,
+    "documented_limitation_count": 2
+  },
+  "documented_limitations": [
+    {
+      "id": 3,
+      "question": "What is Retrieval-Augmented Generation?",
+      "failure_case": "The answer was grounded in SELF-RAG, but the original RAG paper (data3) was not retrieved/cited even though it was an expected supporting paper."
+    },
+    {
+      "id": 6,
+      "question": "How is RLHF used to train language models?",
+      "failure_case": "The answer was correct but slightly incomplete: it stopped after the reward-model stage and omitted the final RL fine-tuning step."
+    }
+  ],
+  "results": [
+    {
+      "id": 1,
+      "question": "What architecture does the Transformer use?",
+      "expected_papers": [
+        "data1"
+      ],
+      "answer": "The Transformer uses an architecture that relies entirely on an attention mechanism, eschewing recurrence. It is a sequence transduction model based entirely on attention, replacing recurrent layers commonly used in encoder-decoder architectures with multi-headed self-attention.\n\nThe overall architecture uses stacked self-attention and point-wise, fully connected layers for both the encoder and decoder. The encoder is composed of a stack of N=6 identical layers. Each encoder layer has two sub-layers: a multi-head self-attention mechanism and a position-wise fully connected feed-forward network. Residual connections are employed around each sub-layer, followed by layer normalization.\n\nSources:\n- Paper: Attention Is All You Need\n  Page: 3\n  The supporting passage: \"The Transformer follows this overall architecture using stacked self-attention and point-wise, fully connected layers for both the encoder and decoder, shown in the left and right halves of Figure 1, respectively. 3.1 Encoder and Decoder Stacks Encoder: The encoder is composed of a stack of N = 6 identical layers. Each layer has two sub-layers. The first is a multi-head self-attention mechanism, and the second is a simple, position-wise fully connected feed-forward network. We employ a residual connection [11] around each of the two sub-layers, followed by layer normalization [ 1]. That is, the output of each sub-layer is LayerNorm(x + Sublayer(x)), where Sublayer(x) is the function implemented by the sub-layer itself. To facilitate these residual connections, all sub-layers in the model, as well as the embedding layers, produce outputs of dimensiondmodel = 512.\"\n- Paper: Attention Is All You Need\n  Page: 2\n  The supporting passage: \"In this work we propose the Transformer, a model architecture eschewing recurrence and instead relying entirely on an attention mechanism to draw global dependencies between input and output.\"\n- Paper: Attention Is All You Need\n  Page: 10\n  The supporting passage: \"In this work, we presented the Transformer, the first sequence transduction model based entirely on attention, replacing the recurrent layers most commonly used in encoder-decoder architectures with multi-headed self-attention.\"",
+      "retrieved_passages": [
+        {
+          "text": "Figure 1: The Transformer - model architecture.\nThe Transformer follows this overall architecture using stacked self-attention and point-wise, fully\nconnected layers for both the encoder and decoder, shown in the left and right halves of Figure 1,\nrespectively.\n3.1 Encoder and Decoder Stacks\nEncoder: The encoder is composed of a stack of N = 6 identical layers. Each layer has two\nsub-layers. The first is a multi-head self-attention mechanism, and the second is a simple, position-\nwise fully connected feed-forward network. We employ a residual connection [11] around each of\nthe two sub-layers, followed by layer normalization [ 1]. That is, the output of each sub-layer is\nLayerNorm(x + Sublayer(x)), where Sublayer(x) is the function implemented by the sub-layer\nitself. To facilitate these residual connections, all sub-layers in the model, as well as the embedding\nlayers, produce outputs of dimensiondmodel = 512.",
+          "metadata": {
+            "chunk_id": "data1_p3_c1",
+            "page": 3,
+            "source": "data1.pdf",
+            "paper_id": "data1",
+            "paper_title": "Attention Is All You Need"
+          },
+          "reranker_score": 0.9955033659934998
+        },
+        {
+          "text": "sequence lengths, as memory constraints limit batching across examples. Recent work has achieved\nsignificant improvements in computational efficiency through factorization tricks [21] and conditional\ncomputation [32], while also improving model performance in case of the latter. The fundamental\nconstraint of sequential computation, however, remains.\nAttention mechanisms have become an integral part of compelling sequence modeling and transduc-\ntion models in various tasks, allowing modeling of dependencies without regard to their distance in\nthe input or output sequences [2, 19]. In all but a few cases [27], however, such attention mechanisms\nare used in conjunction with a recurrent network.\nIn this work we propose the Transformer, a model architecture eschewing recurrence and instead\nrelying entirely on an attention mechanism to draw global dependencies between input and output.\nThe Transformer allows for significantly more parallelization and can reach a new state of the art in",
+          "metadata": {
+            "paper_title": "Attention Is All You Need",
+            "source": "data1.pdf",
+            "chunk_id": "data1_p2_c2",
+            "page": 2,
+            "paper_id": "data1"
+          },
+          "reranker_score": 0.9512066841125488
+        },
+        {
+          "text": "for both WSJ only and the semi-supervised setting.\nOur results in Table 4 show that despite the lack of task-specific tuning our model performs sur-\nprisingly well, yielding better results than all previously reported models with the exception of the\nRecurrent Neural Network Grammar [8].\nIn contrast to RNN sequence-to-sequence models [37], the Transformer outperforms the Berkeley-\nParser [29] even when training only on the WSJ training set of 40K sentences.\n7 Conclusion\nIn this work, we presented the Transformer, the first sequence transduction model based entirely on\nattention, replacing the recurrent layers most commonly used in encoder-decoder architectures with\nmulti-headed self-attention.\nFor translation tasks, the Transformer can be trained significantly faster than architectures based\non recurrent or convolutional layers. On both WMT 2014 English-to-German and WMT 2014\nEnglish-to-French translation tasks, we achieve a new state of the art. In the former task our best",
+          "metadata": {
+            "source": "data1.pdf",
+            "paper_id": "data1",
+            "page": 10,
+            "paper_title": "Attention Is All You Need",
+            "chunk_id": "data1_p10_c2"
+          },
+          "reranker_score": 0.919269859790802
+        }
+      ],
+      "evaluation": {
+        "relevance": 5,
+        "accuracy_completeness": 5,
+        "groundedness": 5,
+        "citation_source_quality": 5,
+        "failure_case": "",
+        "retrieved_papers": [
+          "data1"
+        ],
+        "expected_papers_retrieved": [
+          "data1"
+        ],
+        "missing_expected_papers": [],
+        "full_expected_paper_coverage": true
+      }
+    },
+    {
+      "id": 2,
+      "question": "How does BERT perform pre-training?",
+      "expected_papers": [
+        "data2"
+      ],
+      "answer": "BERT performs pre-training by training on unlabeled text data to learn deep bidirectional representations. It achieves this by jointly conditioning on both left and right context in all layers. During pre-training, the model is trained over different pre-training tasks.\n\nSources:\n- Paper title: BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding\n  Page number: 1\n  The supporting passage: \"BERT is designed to pre-train deep bidirectional representations from unlabeled text by jointly conditioning on both left and right context in all layers.\"\n- Paper title: BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding\n  Page number: 3\n  The supporting passage: \"During pre-training, the model is trained on unlabeled data over different pre-training tasks.\"",
+      "retrieved_passages": [
+        {
+          "text": "BERT: Pre-training of Deep Bidirectional Transformers for\nLanguage Understanding\nJacob Devlin Ming-Wei Chang Kenton Lee Kristina Toutanova\nGoogle AI Language\n{jacobdevlin,mingweichang,kentonl,kristout}@google.com\nAbstract\nWe introduce a new language representa-\ntion model called BERT, which stands for\nBidirectional Encoder Representations from\nTransformers. Unlike recent language repre-\nsentation models (Peters et al., 2018a; Rad-\nford et al., 2018), BERT is designed to pre-\ntrain deep bidirectional representations from\nunlabeled text by jointly conditioning on both\nleft and right context in all layers. As a re-\nsult, the pre-trained BERT model can be ﬁne-\ntuned with just one additional output layer\nto create state-of-the-art models for a wide\nrange of tasks, such as question answering and\nlanguage inference, without substantial task-\nspeciﬁc architecture modiﬁcations.\nBERT is conceptually simple and empirically\npowerful. It obtains new state-of-the-art re-",
+          "metadata": {
+            "paper_id": "data2",
+            "source": "data2.pdf",
+            "chunk_id": "data2_p1_c1",
+            "paper_title": "BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding",
+            "page": 1
+          },
+          "reranker_score": 0.9862906336784363
+        },
+        {
+          "text": "tions/answers).\ning and auto-encoder objectives have been used\nfor pre-training such models (Howard and Ruder,\n2018; Radford et al., 2018; Dai and Le, 2015).\n2.3 Transfer Learning from Supervised Data\nThere has also been work showing effective trans-\nfer from supervised tasks with large datasets, such\nas natural language inference (Conneau et al.,\n2017) and machine translation (McCann et al.,\n2017). Computer vision research has also demon-\nstrated the importance of transfer learning from\nlarge pre-trained models, where an effective recipe\nis to ﬁne-tune models pre-trained with Ima-\ngeNet (Deng et al., 2009; Yosinski et al., 2014).\n3 BERT\nWe introduce BERT and its detailed implementa-\ntion in this section. There are two steps in our\nframework: pre-training and ﬁne-tuning. Dur-\ning pre-training, the model is trained on unlabeled\ndata over different pre-training tasks. For ﬁne-\ntuning, the BERT model is ﬁrst initialized with\nthe pre-trained parameters, and all of the param-",
+          "metadata": {
+            "paper_title": "BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding",
+            "chunk_id": "data2_p3_c2",
+            "page": 3,
+            "source": "data2.pdf",
+            "paper_id": "data2"
+          },
+          "reranker_score": 0.9331039190292358
+        },
+        {
+          "text": "data over different pre-training tasks. For ﬁne-\ntuning, the BERT model is ﬁrst initialized with\nthe pre-trained parameters, and all of the param-\neters are ﬁne-tuned using labeled data from the\ndownstream tasks. Each downstream task has sep-\narate ﬁne-tuned models, even though they are ini-\ntialized with the same pre-trained parameters. The\nquestion-answering example in Figure 1 will serve\nas a running example for this section.\nA distinctive feature of BERT is its uniﬁed ar-\nchitecture across different tasks. There is mini-\nmal difference between the pre-trained architec-\nture and the ﬁnal downstream architecture.\nModel Architecture BERT’s model architec-\nture is a multi-layer bidirectional Transformer en-\ncoder based on the original implementation de-\nscribed in Vaswani et al. (2017) and released in\nthe tensor2tensor library.1 Because the use\nof Transformers has become common and our im-\nplementation is almost identical to the original,\nwe will omit an exhaustive background descrip-",
+          "metadata": {
+            "paper_title": "BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding",
+            "paper_id": "data2",
+            "source": "data2.pdf",
+            "page": 3,
+            "chunk_id": "data2_p3_c3"
+          },
+          "reranker_score": 0.9307991862297058
+        }
+      ],
+      "evaluation": {
+        "relevance": 5,
+        "accuracy_completeness": 5,
+        "groundedness": 5,
+        "citation_source_quality": 5,
+        "failure_case": "",
+        "retrieved_papers": [
+          "data2"
+        ],
+        "expected_papers_retrieved": [
+          "data2"
+        ],
+        "missing_expected_papers": [],
+        "full_expected_paper_coverage": true
+      }
+    },
+    {
+      "id": 3,
+      "question": "What is Retrieval-Augmented Generation?",
+      "expected_papers": [
+        "data3",
+        "data9"
+      ],
+      "answer": "Retrieval-Augmented Generation (RAG) is an ad hoc approach that augments language models (LMs) with the retrieval of relevant knowledge to decrease issues such as factual inaccuracies. Common RAG approaches retrieve passages indiscriminately, without ensuring complete support from cited sources.\n\nSources:\n- Paper: SELF-RAG: Learning to Retrieve, Generate, and Critique through Self-Reflection\n  Page: 1\n  The supporting passage: \"Retrieval-Augmented Generation (RAG), an ad hoc approach that augments LMs with retrieval of relevant knowledge, decreases such issues.\"\n- Paper: SELF-RAG: Learning to Retrieve, Generate, and Critique through Self-Reflection\n  Page: 3\n  The supporting passage: \"In contrast, common RAG approaches retrieve passages indiscriminately, without ensuring complete support from cited sources.\"",
+      "retrieved_passages": [
+        {
+          "text": "Preprint.\nSELF -RAG: L EARNING TO RETRIEVE , G ENERATE , AND\nCRITIQUE THROUGH SELF -R EFLECTION\nAkari Asai†, Zeqiu Wu†, Yizhong Wang†§, Avirup Sil‡, Hannaneh Hajishirzi†§\n†University of Washington §Allen Institute for AI ‡IBM Research AI\n{akari,zeqiuwu,yizhongw,hannaneh}@cs.washington.edu, avi@us.ibm.com\nABSTRACT\nDespite their remarkable capabilities, large language models (LLMs) often produce\nresponses containing factual inaccuracies due to their sole reliance on the paramet-\nric knowledge they encapsulate. Retrieval-Augmented Generation (RAG), an ad\nhoc approach that augments LMs with retrieval of relevant knowledge, decreases\nsuch issues. However, indiscriminately retrieving and incorporating a fixed number\nof retrieved passages, regardless of whether retrieval is necessary, or passages are\nrelevant, diminishes LM versatility or can lead to unhelpful response generation.\nWe introduce a new framework called Self-Reflective Retrieval-Augmented Gen-",
+          "metadata": {
+            "source": "data9.pdf",
+            "paper_title": "SELF-RAG: Learning to Retrieve, Generate, and Critique through Self-Reflection",
+            "chunk_id": "data9_p1_c1",
+            "paper_id": "data9",
+            "page": 1
+          },
+          "reranker_score": 0.9975228905677795
+        },
+        {
+          "text": "language feedback and refined task output iteratively, but at the cost of inference efficiency.\n3 S ELF -R AG: L EARNING TO RETRIEVE , GENERATE AND CRITIQUE\nWe introduce Self-Reflective Retrieval-Augmented Generation ( SELF -RAG), shown in Figure 1.\nSELF -R AG is a framework that enhances the quality and factuality of an LLM through retrieval and\nself-reflection, without sacrificing LLM’s original creativity and versatility. Our end-to-end training\nlets an LMM generate text informed by retrieved passages, if needed, and criticize the output by\nlearning to generate special tokens. These reflection tokens (Table 1) signal the need for retrieval\nor confirm the output’s relevance, support, or completeness. In contrast, common RAG approaches\nretrieve passages indiscriminately, without ensuring complete support from cited sources.\n3.1 P ROBLEM FORMALIZATION AND OVERVIEW\nFormally, given inputx, we trainM to sequentially generate textual outputsy consisting of multiple",
+          "metadata": {
+            "chunk_id": "data9_p3_c5",
+            "source": "data9.pdf",
+            "paper_title": "SELF-RAG: Learning to Retrieve, Generate, and Critique through Self-Reflection",
+            "paper_id": "data9",
+            "page": 3
+          },
+          "reranker_score": 0.9812146425247192
+        },
+        {
+          "text": "We introduce a new framework called Self-Reflective Retrieval-Augmented Gen-\neration (SELF -R AG) that enhances an LM’s quality and factuality through retrieval\nand self-reflection. Our framework trains a single arbitrary LM that adaptively\nretrieves passages on-demand, and generates and reflects on retrieved passages\nand its own generations using special tokens, called reflection tokens. Generating\nreflection tokens makes the LM controllable during the inference phase, enabling it\nto tailor its behavior to diverse task requirements. Experiments show that SELF -\nRAG (7B and 13B parameters) significantly outperforms state-of-the-art LLMs\nand retrieval-augmented models on a diverse set of tasks. Specifically, SELF -RAG\noutperforms ChatGPT and retrieval-augmented Llama2-chat on Open-domain QA,\nreasoning and fact verification tasks, and it shows significant gains in improving\nfactuality and citation accuracy for long-form generations relative to these models.1\n1 I NTRODUCTION",
+          "metadata": {
+            "chunk_id": "data9_p1_c2",
+            "paper_id": "data9",
+            "page": 1,
+            "paper_title": "SELF-RAG: Learning to Retrieve, Generate, and Critique through Self-Reflection",
+            "source": "data9.pdf"
+          },
+          "reranker_score": 0.975637674331665
+        }
+      ],
+      "evaluation": {
+        "relevance": 5,
+        "accuracy_completeness": 4,
+        "groundedness": 5,
+        "citation_source_quality": 3,
+        "failure_case": "The answer was grounded in SELF-RAG, but the original RAG paper (data3) was not retrieved/cited even though it was an expected supporting paper.",
+        "retrieved_papers": [
+          "data9"
+        ],
+        "expected_papers_retrieved": [
+          "data9"
+        ],
+        "missing_expected_papers": [
+          "data3"
+        ],
+        "full_expected_paper_coverage": false
+      }
+    },
+    {
+      "id": 4,
+      "question": "How does LoRA reduce the number of trainable parameters?",
+      "expected_papers": [
+        "data5"
+      ],
+      "answer": "LoRA reduces the number of trainable parameters by freezing the pretrained model weights and instead injecting trainable rank decomposition matrices into each layer of the Transformer architecture. This approach allows for a significant reduction in the number of parameters that need to be trained for downstream tasks. For example, LoRA can reduce the number of trainable parameters by 10,000 times compared to GPT-3 175B fine-tuned with Adam. In the Transformer architecture, LoRA can be applied to subsets of weight matrices, such as the self-attention module's Wq, Wk, Wv, and Wo matrices, while other modules like the MLP can be frozen for parameter-efficiency.\n\n---\n### Sources\n*   **Paper title**: LoRA: Low-Rank Adaptation of Large Language Models\n    *   **Page number**: 1\n    *   **The supporting passage**: \"We propose Low-Rank Adaptation, or LoRA, which freezes the pretrained model weights and injects trainable rank decomposition matrices into each layer of the Transformer architecture, greatly reducing the number of trainable pa-\"\n*   **Paper title**: LoRA: Low-Rank Adaptation of Large Language Models\n    *   **Page number**: 1\n    *   **The supporting passage**: \"layer of the Transformer architecture, greatly reducing the number of trainable pa- rameters for downstream tasks. Compared to GPT-3 175B ﬁne-tuned with Adam, LoRA can reduce the number of trainable parameters by 10,000 times and the GPU memory requirement by 3 times.\"\n*   **Paper title**: LoRA: Low-Rank Adaptation of Large Language Models\n    *   **Page number**: 5\n    *   **The supporting passage**: \"In principle, we can apply LoRA to any subset of weight matrices in a neural network to reduce the number of trainable parameters. In the Transformer architecture, there are four weight matrices in the self-attention module (Wq,Wk,Wv,Wo) and two in the MLP module. ... We limit our study to only adapting the attention weights for downstream tasks and freeze the MLP modules (so they are not trained in downstream tasks) both for simplicity and parameter-efﬁciency.\"",
+      "retrieved_passages": [
+        {
+          "text": "layer of the Transformer architecture, greatly reducing the number of trainable pa-\nrameters for downstream tasks. Compared to GPT-3 175B ﬁne-tuned with Adam,\nLoRA can reduce the number of trainable parameters by 10,000 times and the\nGPU memory requirement by 3 times. LoRA performs on-par or better than ﬁne-\ntuning in model quality on RoBERTa, DeBERTa, GPT-2, and GPT-3, despite hav-\ning fewer trainable parameters, a higher training throughput, and, unlike adapters,\nno additional inference latency . We also provide an empirical investigation into\nrank-deﬁciency in language model adaptation, which sheds light on the efﬁcacy of\nLoRA. We release a package that facilitates the integration of LoRA with PyTorch\nmodels and provide our implementations and model checkpoints for RoBERTa,\nDeBERTa, and GPT-2 athttps://github.com/microsoft/LoRA.\n1 I NTRODUCTION\nPretrained \nWeights\n𝑊 ∈ ℝ𝑑×𝑑\nx\nh\n𝐵 = 0\n𝐴 = 𝒩(0, 𝜎2)\n𝑑\n𝑟\nPretrained \nWeights\n𝑊 ∈ ℝ𝑑×𝑑\nx\nf(x)\n𝑑\nFigure 1: Our reparametriza-",
+          "metadata": {
+            "paper_title": "LoRA: Low-Rank Adaptation of Large Language Models",
+            "paper_id": "data5",
+            "page": 1,
+            "source": "data5.pdf",
+            "chunk_id": "data5_p1_c2"
+          },
+          "reranker_score": 0.9967659711837769
+        },
+        {
+          "text": "LORA: L OW-R ANK ADAPTATION OF LARGE LAN-\nGUAGE MODELS\nEdward Hu∗ Yelong Shen∗ Phillip Wallis Zeyuan Allen-Zhu\nYuanzhi Li Shean Wang Lu Wang Weizhu Chen\nMicrosoft Corporation\n{edwardhu, yeshe, phwallis, zeyuana,\nyuanzhil, swang, luw, wzchen }@microsoft.com\nyuanzhil@andrew.cmu.edu\n(Version 2)\nABSTRACT\nAn important paradigm of natural language processing consists of large-scale pre-\ntraining on general domain data and adaptation to particular tasks or domains. As\nwe pre-train larger models, full ﬁne-tuning, which retrains all model parameters,\nbecomes less feasible. Using GPT-3 175B as an example – deploying indepen-\ndent instances of ﬁne-tuned models, each with 175B parameters, is prohibitively\nexpensive. We propose Low-Rank Adaptation, or LoRA, which freezes the pre-\ntrained model weights and injects trainable rank decomposition matrices into each\nlayer of the Transformer architecture, greatly reducing the number of trainable pa-",
+          "metadata": {
+            "source": "data5.pdf",
+            "chunk_id": "data5_p1_c1",
+            "paper_id": "data5",
+            "paper_title": "LoRA: Low-Rank Adaptation of Large Language Models",
+            "page": 1
+          },
+          "reranker_score": 0.9921051263809204
+        },
+        {
+          "text": "guarantees that we do not introduce any additional latency during inference compared to a ﬁne-tuned\nmodel by construction.\n4.2 A PPLYING LORA TO TRANSFORMER\nIn principle, we can apply LoRA to any subset of weight matrices in a neural network to reduce the\nnumber of trainable parameters. In the Transformer architecture, there are four weight matrices in\nthe self-attention module (Wq,Wk,Wv,Wo) and two in the MLP module. We treatWq (orWk,Wv)\nas a single matrix of dimensiondmodel×dmodel, even though the output dimension is usually sliced\ninto attention heads. We limit our study to only adapting the attention weights for downstream\ntasks and freeze the MLP modules (so they are not trained in downstream tasks) both for simplicity\nand parameter-efﬁciency.We further study the effect on adapting different types of attention weight\nmatrices in a Transformer in Section 7.1. We leave the empirical investigation of adapting the MLP\nlayers, LayerNorm layers, and biases to a future work.",
+          "metadata": {
+            "paper_title": "LoRA: Low-Rank Adaptation of Large Language Models",
+            "chunk_id": "data5_p5_c1",
+            "paper_id": "data5",
+            "source": "data5.pdf",
+            "page": 5
+          },
+          "reranker_score": 0.9761669635772705
+        }
+      ],
+      "evaluation": {
+        "relevance": 5,
+        "accuracy_completeness": 5,
+        "groundedness": 5,
+        "citation_source_quality": 5,
+        "failure_case": "",
+        "retrieved_papers": [
+          "data5"
+        ],
+        "expected_papers_retrieved": [
+          "data5"
+        ],
+        "missing_expected_papers": [],
+        "full_expected_paper_coverage": true
+      }
+    },
+    {
+      "id": 5,
+      "question": "What is Chain-of-Thought prompting?",
+      "expected_papers": [
+        "data6"
+      ],
+      "answer": "Chain-of-Thought prompting is an approach where a prompt consists of triples: ⟨input, chain of thought, output⟩. A \"chain of thought\" refers to a series of intermediate natural language reasoning steps that lead to the final output. This method is used to elicit reasoning in large language models, particularly for few-shot prompting tasks.\n\nSources:\n- Paper title: Chain-of-Thought Prompting Elicits Reasoning in Large Language Models\n  Page number: 2\n  The supporting passage: \"Speciﬁcally, we explore the ability of language models to perform few-shot prompting for reasoning tasks, given a prompt that consists of triples:⟨input, chain of thought, output⟩. A chain of thought is a series of intermediate natural language reasoning steps that lead to the ﬁnal output, and we refer to this approach as chain-of-thought prompting.\"",
+      "retrieved_passages": [
+        {
+          "text": "Speciﬁcally, we explore the ability of language models to perform few-shot prompting for reasoning\ntasks, given a prompt that consists of triples:⟨input, chain of thought, output⟩. A chain of thought is\na series of intermediate natural language reasoning steps that lead to the ﬁnal output, and we refer to\nthis approach as chain-of-thought prompting. An example prompt is shown in Figure 1.\nWe present empirical evaluations on arithmetic, commonsense, and symbolic reasoning benchmarks,\nshowing that chain-of-thought prompting outperforms standard prompting, sometimes to a striking\ndegree. Figure 2 illustrates one such result—on the GSM8K benchmark of math word problems\n(Cobbe et al., 2021), chain-of-thought prompting with PaLM 540B outperforms standard prompting\nby a large margin and achieves new state-of-the-art performance. A prompting only approach is\nimportant because it does not require a large training dataset and because a single model checkpoint",
+          "metadata": {
+            "source": "data6.pdf",
+            "page": 2,
+            "paper_id": "data6",
+            "paper_title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+            "chunk_id": "data6_p2_c4"
+          },
+          "reranker_score": 0.9984816908836365
+        },
+        {
+          "text": "C Extended Related Work\nChain-of-thought prompting is a general approach that is inspired by several prior directions: prompt-\ning, natural language explanations, program synthesis/execution, numeric and logical reasoning, and\nintermediate language steps.\nC.1 Prompting\nThe recent success of large-scale language models has led to growing interest in improving their\ncapability to perform tasks via prompting (Brown et al. (2020), and see Liu et al. (2021) for a\nsurvey). This paper falls in the category of general prompting approaches, whereby input prompts are\noptimized to allow a single large language model to better perform a variety of tasks (Li and Liang,\n2021; Lester et al., 2021; Reif et al., 2022, inter alia).\nOne recent line of work aims to improve the ability of language models to perform a task by providing\ninstructions that describe the task (Raffel et al., 2020; Wei et al., 2022a; Ouyang et al., 2022; Sanh",
+          "metadata": {
+            "paper_id": "data6",
+            "paper_title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+            "chunk_id": "data6_p24_c1",
+            "source": "data6.pdf",
+            "page": 24
+          },
+          "reranker_score": 0.9968469738960266
+        },
+        {
+          "text": "Table 4: Standard prompting versus chain of thought prompting on ﬁve commonsense reasoning\nbenchmarks. Chain of thought prompting is an emergent ability of model scale—it does not positively\nimpact performance until used with a model of sufﬁcient scale.\nCSQA StrategyQA Date Sports SayCan\nModel standard CoT standard CoT standard CoT standard CoT standard CoT\nUL2 20B 34.2 51.4 59.0 53.3 13.5 14.0 57.9 65.3 20.0 41.7\nLaMDA 420M 20.1 19.2 46.4 24.9 1.9 1.6 50.0 49.7 7.5 7.5\n2B 20.2 19.6 52.6 45.2 8.0 6.8 49.3 57.5 8.3 8.3\n8B 19.0 20.3 54.1 46.8 9.5 5.4 50.0 52.1 28.3 33.3\n68B 37.0 44.1 59.6 62.2 15.5 18.6 55.2 77.5 35.0 42.5\n137B 53.6 57.9 62.4 65.4 21.5 26.8 59.5 85.8 43.3 46.6\nGPT 350M 14.7 15.2 20.6 0.9 4.3 0.9 33.8 41.6 12.5 0.8\n1.3B 12.0 19.2 45.8 35.7 4.0 1.4 0.0 26.9 20.8 9.2\n6.7B 19.0 24.0 53.6 50.0 8.9 4.9 0.0 4.4 17.5 35.0\n175B 79.5 73.5 65.9 65.4 43.8 52.1 69.6 82.4 81.7 87.5\nCodex - 82.3 77.9 67.1 73.2 49.0 64.8 71.7 98.5 85.8 88.3",
+          "metadata": {
+            "paper_id": "data6",
+            "source": "data6.pdf",
+            "paper_title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+            "page": 22,
+            "chunk_id": "data6_p22_c1"
+          },
+          "reranker_score": 0.9964009523391724
+        }
+      ],
+      "evaluation": {
+        "relevance": 5,
+        "accuracy_completeness": 5,
+        "groundedness": 5,
+        "citation_source_quality": 5,
+        "failure_case": "",
+        "retrieved_papers": [
+          "data6"
+        ],
+        "expected_papers_retrieved": [
+          "data6"
+        ],
+        "missing_expected_papers": [],
+        "full_expected_paper_coverage": true
+      }
+    },
+    {
+      "id": 6,
+      "question": "How is RLHF used to train language models?",
+      "expected_papers": [
+        "data7"
+      ],
+      "answer": "RLHF is used to train language models by employing human preferences as a reward signal for fine-tuning. This involves:\n1. Collecting a dataset of human-labeled comparisons between outputs generated by the models.\n2. Training a reward model (RM) on this dataset to predict which model output human labelers would prefer.\nThis reward model then guides the fine-tuning of the language model.\n\nSources:\n- Paper title: Training Language Models to Follow Instructions with Human Feedback\n  Page number: 2\n  The supporting passage: \"We focus on ﬁne-tuning approaches to aligning language models. Speciﬁcally, we use reinforcement learning from human feedback (RLHF; Christiano et al., 2017; Stiennon et al., 2020) to ﬁne-tune GPT-3 to follow a broad class of written instructions (see Figure 2). This technique uses human preferences as a reward signal to ﬁne-tune our models. We ﬁrst hire a team of 40 contractors to label our data, based on their performance on a screening test (see Section 3.4 and Appendix B.1 for more details). We then collect a dataset of human-written demonstrations of the desired output behavior on (mostly English) prompts submitted to the OpenAI API3 and some labeler-written prompts, and use this to train our supervised learning baselines. Next, we collect a dataset of human-labeled comparisons between outputs from our models on a larger set of API prompts. We then train a reward model (RM) on this dataset to predict which model output our labelers would prefer. Finally, we\"",
+      "retrieved_passages": [
+        {
+          "text": "and broader impacts of this work (5.5).\n2 Related work\nResearch on alignment and learning from human feedback. We build on previous techniques\nto align models with human intentions, particularly reinforcement learning from human feed-\nback (RLHF). Originally developed for training simple robots in simulated environments and Atari\ngames (Christiano et al., 2017; Ibarz et al., 2018), it has recently been applied to ﬁne-tuning language\nmodels to summarize text (Ziegler et al., 2019; Stiennon et al., 2020; Böhm et al., 2019; Wu et al.,\n2021). This work is in turn inﬂuenced by similar work using human feedback as a reward in domains\nsuch as dialogue (Jaques et al., 2019; Yi et al., 2019; Hancock et al., 2019), translation (Kreutzer et al.,\n2018; Bahdanau et al., 2016), semantic parsing (Lawrence and Riezler, 2018), story generation (Zhou\nand Xu, 2020), review generation (Cho et al., 2018), and evidence extraction (Perez et al., 2019).",
+          "metadata": {
+            "page": 4,
+            "paper_id": "data7",
+            "source": "data7.pdf",
+            "chunk_id": "data7_p4_c5",
+            "paper_title": "Training Language Models to Follow Instructions with Human Feedback"
+          },
+          "reranker_score": 0.964607834815979
+        },
+        {
+          "text": "We focus on ﬁne-tuning approaches to aligning language models. Speciﬁcally, we use reinforcement\nlearning from human feedback (RLHF; Christiano et al., 2017; Stiennon et al., 2020) to ﬁne-tune\nGPT-3 to follow a broad class of written instructions (see Figure 2). This technique uses human\npreferences as a reward signal to ﬁne-tune our models. We ﬁrst hire a team of 40 contractors to label\nour data, based on their performance on a screening test (see Section 3.4 and Appendix B.1 for more\ndetails). We then collect a dataset of human-written demonstrations of the desired output behavior\non (mostly English) prompts submitted to the OpenAI API3 and some labeler-written prompts, and\nuse this to train our supervised learning baselines. Next, we collect a dataset of human-labeled\ncomparisons between outputs from our models on a larger set of API prompts. We then train a reward\nmodel (RM) on this dataset to predict which model output our labelers would prefer. Finally, we",
+          "metadata": {
+            "chunk_id": "data7_p2_c3",
+            "paper_id": "data7",
+            "source": "data7.pdf",
+            "page": 2,
+            "paper_title": "Training Language Models to Follow Instructions with Human Feedback"
+          },
+          "reranker_score": 0.9546825885772705
+        },
+        {
+          "text": "a normative prior (Nahian et al., 2021). Our work can be seen as a direct application of RLHF to\naligning language models on a broad distribution of language tasks.\nThe question of what it means for language models to be aligned has also received attention re-\ncently (Gabriel, 2020). Kenton et al. (2021) catalog behavioral issues in LMs that result from\nmisalignment, including producing harmful content and gaming misspeciﬁed objectives. In concur-\nrent work, Askell et al. (2021) propose language assistants as a testbed for alignment research, study\nsome simple baselines, and their scaling properties.\nTraining language models to follow instructions. Our work is also related to research on cross-\ntask generalization in language models, where LMs are ﬁne-tuned on a broad range of public NLP\ndatasets (usually preﬁxed with an appropriate instruction) and evaluated on a different set of NLP\ntasks. There has been a range of work in this domain (Yi et al., 2019; Mishra et al., 2021; Wei",
+          "metadata": {
+            "source": "data7.pdf",
+            "paper_title": "Training Language Models to Follow Instructions with Human Feedback",
+            "page": 5,
+            "paper_id": "data7",
+            "chunk_id": "data7_p5_c1"
+          },
+          "reranker_score": 0.8785495162010193
+        }
+      ],
+      "evaluation": {
+        "relevance": 5,
+        "accuracy_completeness": 4,
+        "groundedness": 5,
+        "citation_source_quality": 5,
+        "failure_case": "The answer was correct but slightly incomplete: it stopped after the reward-model stage and omitted the final RL fine-tuning step.",
+        "retrieved_papers": [
+          "data7"
+        ],
+        "expected_papers_retrieved": [
+          "data7"
+        ],
+        "missing_expected_papers": [],
+        "full_expected_paper_coverage": true
+      }
+    },
+    {
+      "id": 7,
+      "question": "What is SELF-RAG?",
+      "expected_papers": [
+        "data9"
+      ],
+      "answer": "SELF-RAG (Self-Reflective Retrieval-Augmented Generation) is a framework designed to enhance the quality and factuality of a language model (LM or LLM) through retrieval and self-reflection. It trains a single arbitrary LM to adaptively retrieve passages on-demand and to generate and reflect on both retrieved passages and its own generations using special \"reflection tokens.\" These tokens enable the LM to signal the need for retrieval or confirm the output's relevance, support, or completeness, making the LM controllable during inference and avoiding the indiscriminate retrieval common in other RAG approaches.\n\nSources:\n- Paper: SELF-RAG: Learning to Retrieve, Generate, and Critique through Self-Reflection\n  Page: 1\n  The supporting passage: \"We introduce a new framework called Self-Reflective Retrieval-Augmented Gen- eration (SELF -R AG) that enhances an LM’s quality and factuality through retrieval and self-reflection. Our framework trains a single arbitrary LM that adaptively retrieves passages on-demand, and generates and reflects on retrieved passages and its own generations using special tokens, called reflection tokens. Generating reflection tokens makes the LM controllable during the inference phase, enabling it to tailor its behavior to diverse task requirements.\"\n- Paper: SELF-RAG: Learning to Retrieve, Generate, and Critique through Self-Reflection\n  Page: 3\n  The supporting passage: \"We introduce Self-Reflective Retrieval-Augmented Generation ( SELF -RAG), shown in Figure 1. SELF -R AG is a framework that enhances the quality and factuality of an LLM through retrieval and self-reflection, without sacrificing LLM’s original creativity and versatility. Our end-to-end training lets an LMM generate text informed by retrieved passages, if needed, and criticize the output by learning to generate special tokens. These reflection tokens (Table 1) signal the need for retrieval or confirm the output’s relevance, support, or completeness. In contrast, common RAG approaches retrieve passages indiscriminately, without ensuring complete support from cited sources.\"",
+      "retrieved_passages": [
+        {
+          "text": "language feedback and refined task output iteratively, but at the cost of inference efficiency.\n3 S ELF -R AG: L EARNING TO RETRIEVE , GENERATE AND CRITIQUE\nWe introduce Self-Reflective Retrieval-Augmented Generation ( SELF -RAG), shown in Figure 1.\nSELF -R AG is a framework that enhances the quality and factuality of an LLM through retrieval and\nself-reflection, without sacrificing LLM’s original creativity and versatility. Our end-to-end training\nlets an LMM generate text informed by retrieved passages, if needed, and criticize the output by\nlearning to generate special tokens. These reflection tokens (Table 1) signal the need for retrieval\nor confirm the output’s relevance, support, or completeness. In contrast, common RAG approaches\nretrieve passages indiscriminately, without ensuring complete support from cited sources.\n3.1 P ROBLEM FORMALIZATION AND OVERVIEW\nFormally, given inputx, we trainM to sequentially generate textual outputsy consisting of multiple",
+          "metadata": {
+            "paper_id": "data9",
+            "page": 3,
+            "paper_title": "SELF-RAG: Learning to Retrieve, Generate, and Critique through Self-Reflection",
+            "source": "data9.pdf",
+            "chunk_id": "data9_p3_c5"
+          },
+          "reranker_score": 0.9932844638824463
+        },
+        {
+          "text": "We introduce a new framework called Self-Reflective Retrieval-Augmented Gen-\neration (SELF -R AG) that enhances an LM’s quality and factuality through retrieval\nand self-reflection. Our framework trains a single arbitrary LM that adaptively\nretrieves passages on-demand, and generates and reflects on retrieved passages\nand its own generations using special tokens, called reflection tokens. Generating\nreflection tokens makes the LM controllable during the inference phase, enabling it\nto tailor its behavior to diverse task requirements. Experiments show that SELF -\nRAG (7B and 13B parameters) significantly outperforms state-of-the-art LLMs\nand retrieval-augmented models on a diverse set of tasks. Specifically, SELF -RAG\noutperforms ChatGPT and retrieval-augmented Llama2-chat on Open-domain QA,\nreasoning and fact verification tasks, and it shows significant gains in improving\nfactuality and citation accuracy for long-form generations relative to these models.1\n1 I NTRODUCTION",
+          "metadata": {
+            "paper_id": "data9",
+            "source": "data9.pdf",
+            "chunk_id": "data9_p1_c2",
+            "paper_title": "SELF-RAG: Learning to Retrieve, Generate, and Critique through Self-Reflection",
+            "page": 1
+          },
+          "reranker_score": 0.9797670841217041
+        },
+        {
+          "text": "Preprint.\nSELF -RAG: L EARNING TO RETRIEVE , G ENERATE , AND\nCRITIQUE THROUGH SELF -R EFLECTION\nAkari Asai†, Zeqiu Wu†, Yizhong Wang†§, Avirup Sil‡, Hannaneh Hajishirzi†§\n†University of Washington §Allen Institute for AI ‡IBM Research AI\n{akari,zeqiuwu,yizhongw,hannaneh}@cs.washington.edu, avi@us.ibm.com\nABSTRACT\nDespite their remarkable capabilities, large language models (LLMs) often produce\nresponses containing factual inaccuracies due to their sole reliance on the paramet-\nric knowledge they encapsulate. Retrieval-Augmented Generation (RAG), an ad\nhoc approach that augments LMs with retrieval of relevant knowledge, decreases\nsuch issues. However, indiscriminately retrieving and incorporating a fixed number\nof retrieved passages, regardless of whether retrieval is necessary, or passages are\nrelevant, diminishes LM versatility or can lead to unhelpful response generation.\nWe introduce a new framework called Self-Reflective Retrieval-Augmented Gen-",
+          "metadata": {
+            "paper_title": "SELF-RAG: Learning to Retrieve, Generate, and Critique through Self-Reflection",
+            "page": 1,
+            "chunk_id": "data9_p1_c1",
+            "paper_id": "data9",
+            "source": "data9.pdf"
+          },
+          "reranker_score": 0.9563112258911133
+        }
+      ],
+      "evaluation": {
+        "relevance": 5,
+        "accuracy_completeness": 5,
+        "groundedness": 5,
+        "citation_source_quality": 5,
+        "failure_case": "",
+        "retrieved_papers": [
+          "data9"
+        ],
+        "expected_papers_retrieved": [
+          "data9"
+        ],
+        "missing_expected_papers": [],
+        "full_expected_paper_coverage": true
+      }
+    },
+    {
+      "id": 8,
+      "question": "What is the main idea behind LLaMA?",
+      "expected_papers": [
+        "data8"
+      ],
+      "answer": "The main idea behind LLaMA is to train a series of foundation language models that achieve the best possible performance at various inference budgets by training on more tokens than typically used. These models, ranging from 7B to 65B parameters, aim to be competitive with or outperform existing large language models (LLMs) while being smaller and more efficient for inference. A key aspect is that LLaMA models are trained exclusively on publicly available datasets, making them compatible with open-sourcing and helping to democratize access and study of LLMs.\n\nSources:\n- Paper title: LLaMA: Open and Efficient Foundation Language Models\n  - Page number: 1\n  - The supporting passage: \"The focus of this work is to train a series of language models that achieve the best possible performance at various inference budgets, by training on more tokens than what is typically used. The resulting models, called LLaMA, ranges from 7B to 65B parameters with competitive performance compared to the best existing LLMs.\"\n- Paper title: LLaMA: Open and Efficient Foundation Language Models\n  - Page number: 1\n  - The supporting passage: \"Unlike Chinchilla, PaLM, or GPT-3, we only use publicly available data, making our work compatible with open-sourcing, while most existing models rely on data which is either not publicly available or undocumented... We believe that this model will help democratize the access and study of LLMs, since it can be run on a single GPU.\"\n- Paper title: LLaMA: Open and Efficient Foundation Language Models\n  - Page number: 1\n  - The supporting passage: \"We train our models on trillions of tokens, and show that it is possible to train state-of-the-art models using publicly available datasets exclusively, without resorting to proprietary and inaccessible datasets. In particular, LLaMA-13B outperforms GPT-3 (175B) on most benchmarks, and LLaMA-65B is competitive with the best models, Chinchilla-70B and PaLM-540B. We release all our models to the research community.\"",
+      "retrieved_passages": [
+        {
+          "text": "formance at various inference budgets, by training\non more tokens than what is typically used. The\nresulting models, called LLaMA, ranges from 7B\nto 65B parameters with competitive performance\ncompared to the best existing LLMs. For instance,\nLLaMA-13B outperforms GPT-3 on most bench-\nmarks, despite being 10× smaller. We believe that\nthis model will help democratize the access and\nstudy of LLMs, since it can be run on a single GPU.\nAt the higher-end of the scale, our 65B-parameter\nmodel is also competitive with the best large lan-\nguage models such as Chinchilla or PaLM-540B.\nUnlike Chinchilla, PaLM, or GPT-3, we only\nuse publicly available data, making our work com-\npatible with open-sourcing, while most existing\nmodels rely on data which is either not publicly\navailable or undocumented (e.g. “Books – 2TB” or\n“Social media conversations”). There exist some\nexceptions, notably OPT (Zhang et al., 2022),\nGPT-NeoX (Black et al., 2022), BLOOM (Scao",
+          "metadata": {
+            "chunk_id": "data8_p1_c4",
+            "page": 1,
+            "paper_id": "data8",
+            "paper_title": "LLaMA: Open and Efficient Foundation Language Models",
+            "source": "data8.pdf"
+          },
+          "reranker_score": 0.42644283175468445
+        },
+        {
+          "text": "disregards the inference budget, which becomes\ncritical when serving a language model at scale.\nIn this context, given a target level of performance,\nthe preferred model is not the fastest to train but the\nfastest at inference, and although it may be cheaper\nto train a large model to reach a certain level of\n∗ Equal contribution. Correspondence: {htouvron,\nthibautlav,gizacard,egrave,glample}@meta.com\n1https://github.com/facebookresearch/llama\nperformance, a smaller one trained longer will\nultimately be cheaper at inference. For instance,\nalthough Hoffmann et al. (2022) recommends\ntraining a 10B model on 200B tokens, we ﬁnd\nthat the performance of a 7B model continues to\nimprove even after 1T tokens.\nThe focus of this work is to train a series of\nlanguage models that achieve the best possible per-\nformance at various inference budgets, by training\non more tokens than what is typically used. The\nresulting models, called LLaMA, ranges from 7B",
+          "metadata": {
+            "source": "data8.pdf",
+            "chunk_id": "data8_p1_c3",
+            "paper_title": "LLaMA: Open and Efficient Foundation Language Models",
+            "page": 1,
+            "paper_id": "data8"
+          },
+          "reranker_score": 0.4142119884490967
+        },
+        {
+          "text": "LLaMA: Open and Efﬁcient Foundation Language Models\nHugo Touvron∗, Thibaut Lavril∗, Gautier Izacard∗, Xavier Martinet\nMarie-Anne Lachaux, Timothee Lacroix, Baptiste Rozière, Naman Goyal\nEric Hambro, Faisal Azhar, Aurelien Rodriguez, Armand Joulin\nEdouard Grave∗, Guillaume Lample∗\nMeta AI\nAbstract\nWe introduce LLaMA, a collection of founda-\ntion language models ranging from 7B to 65B\nparameters. We train our models on trillions\nof tokens, and show that it is possible to train\nstate-of-the-art models using publicly avail-\nable datasets exclusively, without resorting\nto proprietary and inaccessible datasets. In\nparticular, LLaMA-13B outperforms GPT-3\n(175B) on most benchmarks, and LLaMA-\n65B is competitive with the best models,\nChinchilla-70B and PaLM-540B. We release\nall our models to the research community1.\n1 Introduction\nLarge Languages Models (LLMs) trained on mas-\nsive corpora of texts have shown their ability to per-\nform new tasks from textual instructions or from a",
+          "metadata": {
+            "page": 1,
+            "chunk_id": "data8_p1_c1",
+            "paper_title": "LLaMA: Open and Efficient Foundation Language Models",
+            "source": "data8.pdf",
+            "paper_id": "data8"
+          },
+          "reranker_score": 0.3797976076602936
+        }
+      ],
+      "evaluation": {
+        "relevance": 5,
+        "accuracy_completeness": 5,
+        "groundedness": 5,
+        "citation_source_quality": 5,
+        "failure_case": "",
+        "retrieved_papers": [
+          "data8"
+        ],
+        "expected_papers_retrieved": [
+          "data8"
+        ],
+        "missing_expected_papers": [],
+        "full_expected_paper_coverage": true
+      }
+    },
+    {
+      "id": 9,
+      "question": "What is the GPT-3 model capable of doing with few-shot learning?",
+      "expected_papers": [
+        "data4"
+      ],
+      "answer": "With few-shot learning, the GPT-3 model is capable of:\n*   Unscrambling words.\n*   Performing arithmetic.\n*   Using novel words in a sentence after seeing them defined only once.\n*   Generating synthetic news articles that human evaluators have difficulty distinguishing from human-generated articles.\n*   Correcting English grammar.\n*   Achieving promising results on various NLP tasks, sometimes competitive with or surpassing state-of-the-art models. For example, it achieves 85.0 F1 on CoQA and 71.2% accuracy on TriviaQA, the latter being state-of-the-art in a closed-book setting.\n*   Displaying proficiency at tasks designed to test rapid adaptation or on-the-fly reasoning.\n\n### Sources\n*   **Paper title**: Language Models are Few-Shot Learners\n    *   **Page number**: 5\n    *   **The supporting passage**: \"GPT-3 also displays one-shot and few-shot proﬁciency at tasks designed to test rapid adaption or on-the-ﬂy reasoning, which include unscrambling words, performing arithmetic, and using novel words in a sentence after seeing them deﬁned only once. We also show that in the few-shot setting, GPT-3 can generate synthetic news articles which human evaluators have difﬁculty distinguishing from human-generated articles.\"\n*   **Paper title**: Language Models are Few-Shot Learners\n    *   **Page number**: 29\n    *   **The supporting passage**: \"Overall, GPT-3 appears to be at least proﬁcient at the task of using novel words in a sentence. 3.9.6 Correcting English Grammar Another task well suited for few-shot learning is correcting English grammar.\"\n*   **Paper title**: Language Models are Few-Shot Learners\n    *   **Page number**: 5\n    *   **The supporting passage**: \"Broadly, on NLP tasks GPT-3 achieves promising results in the zero-shot and one-shot settings, and in the the few-shot setting is sometimes competitive with or even occasionally surpasses state-of-the-art (despite state-of-the-art being held by ﬁne-tuned models). For example, GPT-3 achieves 81.5 F1 on CoQA in the zero-shot setting, 84.0 F1 on CoQA in the one-shot setting, 85.0 F1 in the few-shot setting. Similarly, GPT-3 achieves 64.3% accuracy on TriviaQA in the zero-shot setting, 68.0% in the one-shot setting, and 71.2% in the few-shot setting, the last of which is state-of-the-art relative to ﬁne-tuned models operating in the same closed-book setting. GPT-3 also displays one-shot and few-shot proﬁciency at tasks designed to test rapid adaption or on-the-ﬂy reasoning,\"",
+      "retrieved_passages": [
+        {
+          "text": "GPT-3 also displays one-shot and few-shot proﬁciency at tasks designed to test rapid adaption or on-the-ﬂy reasoning,\nwhich include unscrambling words, performing arithmetic, and using novel words in a sentence after seeing them\ndeﬁned only once. We also show that in the few-shot setting, GPT-3 can generate synthetic news articles which human\nevaluators have difﬁculty distinguishing from human-generated articles.\nAt the same time, we also ﬁnd some tasks on which few-shot performance struggles, even at the scale of GPT-3. This\nincludes natural language inference tasks like the ANLI dataset, and some reading comprehension datasets like RACE\nor QuAC. By presenting a broad characterization of GPT-3’s strengths and weaknesses, including these limitations, we\nhope to stimulate study of few-shot learning in language models and draw attention to where progress is most needed.",
+          "metadata": {
+            "page": 5,
+            "source": "data4.pdf",
+            "paper_title": "Language Models are Few-Shot Learners",
+            "paper_id": "data4",
+            "chunk_id": "data4_p5_c4"
+          },
+          "reranker_score": 0.9925411939620972
+        },
+        {
+          "text": "sword ﬁght. Overall, GPT-3 appears to be at least proﬁcient at the task of using novel words in a sentence.\n3.9.6 Correcting English Grammar\nAnother task well suited for few-shot learning is correcting English grammar. We test this with GPT-3 in the few-\nshot setting by giving prompts of the form \"Poor English Input: <sentence> \\n Good English Output:\n<sentence>\". We give GPT-3 one human-generated correction and then ask it to correct 5 more (again without any\nomissions or repeats). Results are shown in Figure 3.17.\n4 Measuring and Preventing Memorization Of Benchmarks\nSince our training dataset is sourced from the internet, it is possible that our model was trained on some of our\nbenchmark test sets. Accurately detecting test contamination from internet-scale datasets is a new area of research\nwithout established best practices. While it is common practice to train large models without investigating contamination,",
+          "metadata": {
+            "paper_id": "data4",
+            "source": "data4.pdf",
+            "chunk_id": "data4_p29_c4",
+            "paper_title": "Language Models are Few-Shot Learners",
+            "page": 29
+          },
+          "reranker_score": 0.9428689479827881
+        },
+        {
+          "text": "number of examples in-context hold for most tasks we study. We emphasize that these “learning” curves involve no\ngradient updates or ﬁne-tuning, just increasing numbers of demonstrations given as conditioning.\nBroadly, on NLP tasks GPT-3 achieves promising results in the zero-shot and one-shot settings, and in the the few-shot\nsetting is sometimes competitive with or even occasionally surpasses state-of-the-art (despite state-of-the-art being held\nby ﬁne-tuned models). For example, GPT-3 achieves 81.5 F1 on CoQA in the zero-shot setting, 84.0 F1 on CoQA in\nthe one-shot setting, 85.0 F1 in the few-shot setting. Similarly, GPT-3 achieves 64.3% accuracy on TriviaQA in the\nzero-shot setting, 68.0% in the one-shot setting, and 71.2% in the few-shot setting, the last of which is state-of-the-art\nrelative to ﬁne-tuned models operating in the same closed-book setting.\nGPT-3 also displays one-shot and few-shot proﬁciency at tasks designed to test rapid adaption or on-the-ﬂy reasoning,",
+          "metadata": {
+            "paper_title": "Language Models are Few-Shot Learners",
+            "chunk_id": "data4_p5_c3",
+            "page": 5,
+            "paper_id": "data4",
+            "source": "data4.pdf"
+          },
+          "reranker_score": 0.9242680668830872
+        }
+      ],
+      "evaluation": {
+        "relevance": 5,
+        "accuracy_completeness": 5,
+        "groundedness": 5,
+        "citation_source_quality": 5,
+        "failure_case": "",
+        "retrieved_papers": [
+          "data4"
+        ],
+        "expected_papers_retrieved": [
+          "data4"
+        ],
+        "missing_expected_papers": [],
+        "full_expected_paper_coverage": true
+      }
+    },
+    {
+      "id": 10,
+      "question": "Why does BERT use bidirectional representations?",
+      "expected_papers": [
+        "data2"
+      ],
+      "answer": "BERT uses bidirectional representations because it is crucial to incorporate context from both directions for token-level tasks such as question answering. This design allows BERT to jointly condition on both left and right context in all layers, enabling the representation to fuse both contexts. This approach alleviates the unidirectionality constraint found in previous language representation models.\n\nSources:\n- Paper: BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding\n  Page: 1\n  The supporting passage: \"BERT is designed to pre-train deep bidirectional representations from unlabeled text by jointly conditioning on both left and right context in all layers.\"\n- Paper: BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding\n  Page: 2\n  The supporting passage: \"the MLM objective enables the representation to fuse the left and the right context, which allows us to pre-train a deep bidirectional Transformer. In addition to the masked language model, we also use a “next sentence prediction” task that jointly pre-trains text-pair representations. The contributions of our paper are as follows: • We demonstrate the importance of bidirectional pre-training for language representations.\"\n- Paper: BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding\n  Page: 1\n  The supporting passage: \"tuning based approaches to token-level tasks such as question answering, where it is crucial to incorporate context from both directions. In this paper, we improve the ﬁne-tuning based approaches by proposing BERT: Bidirectional Encoder Representations from Transformers. BERT alleviates the previously mentioned unidirectionality constraint by using a “masked language model” (MLM) pre-training objective\"",
+      "retrieved_passages": [
+        {
+          "text": "BERT: Pre-training of Deep Bidirectional Transformers for\nLanguage Understanding\nJacob Devlin Ming-Wei Chang Kenton Lee Kristina Toutanova\nGoogle AI Language\n{jacobdevlin,mingweichang,kentonl,kristout}@google.com\nAbstract\nWe introduce a new language representa-\ntion model called BERT, which stands for\nBidirectional Encoder Representations from\nTransformers. Unlike recent language repre-\nsentation models (Peters et al., 2018a; Rad-\nford et al., 2018), BERT is designed to pre-\ntrain deep bidirectional representations from\nunlabeled text by jointly conditioning on both\nleft and right context in all layers. As a re-\nsult, the pre-trained BERT model can be ﬁne-\ntuned with just one additional output layer\nto create state-of-the-art models for a wide\nrange of tasks, such as question answering and\nlanguage inference, without substantial task-\nspeciﬁc architecture modiﬁcations.\nBERT is conceptually simple and empirically\npowerful. It obtains new state-of-the-art re-",
+          "metadata": {
+            "paper_id": "data2",
+            "source": "data2.pdf",
+            "chunk_id": "data2_p1_c1",
+            "paper_title": "BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding",
+            "page": 1
+          },
+          "reranker_score": 0.9785294532775879
+        },
+        {
+          "text": "word based only on its context. Unlike left-to-\nright language model pre-training, the MLM ob-\njective enables the representation to fuse the left\nand the right context, which allows us to pre-\ntrain a deep bidirectional Transformer. In addi-\ntion to the masked language model, we also use\na “next sentence prediction” task that jointly pre-\ntrains text-pair representations. The contributions\nof our paper are as follows:\n• We demonstrate the importance of bidirectional\npre-training for language representations. Un-\nlike Radford et al. (2018), which uses unidirec-\ntional language models for pre-training, BERT\nuses masked language models to enable pre-\ntrained deep bidirectional representations. This\nis also in contrast to Peters et al. (2018a), which\nuses a shallow concatenation of independently\ntrained left-to-right and right-to-left LMs.\n• We show that pre-trained representations reduce\nthe need for many heavily-engineered task-\nspeciﬁc architectures. BERT is the ﬁrst ﬁne-",
+          "metadata": {
+            "paper_id": "data2",
+            "page": 2,
+            "chunk_id": "data2_p2_c1",
+            "source": "data2.pdf",
+            "paper_title": "BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding"
+          },
+          "reranker_score": 0.9738929867744446
+        },
+        {
+          "text": "tuning based approaches to token-level tasks such\nas question answering, where it is crucial to incor-\nporate context from both directions.\nIn this paper, we improve the ﬁne-tuning based\napproaches by proposing BERT: Bidirectional\nEncoder Representations from Transformers.\nBERT alleviates the previously mentioned unidi-\nrectionality constraint by using a “masked lan-\nguage model” (MLM) pre-training objective, in-\nspired by the Cloze task (Taylor, 1953). The\nmasked language model randomly masks some of\nthe tokens from the input, and the objective is to\npredict the original vocabulary id of the masked\narXiv:1810.04805v2 [cs.CL] 24 May 2019",
+          "metadata": {
+            "source": "data2.pdf",
+            "chunk_id": "data2_p1_c5",
+            "paper_id": "data2",
+            "paper_title": "BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding",
+            "page": 1
+          },
+          "reranker_score": 0.9581252336502075
+        }
+      ],
+      "evaluation": {
+        "relevance": 5,
+        "accuracy_completeness": 5,
+        "groundedness": 5,
+        "citation_source_quality": 5,
+        "failure_case": "",
+        "retrieved_papers": [
+          "data2"
+        ],
+        "expected_papers_retrieved": [
+          "data2"
+        ],
+        "missing_expected_papers": [],
+        "full_expected_paper_coverage": true
+      }
+    }
+  ]
+}
