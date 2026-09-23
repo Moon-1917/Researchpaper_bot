@@ -1,0 +1,52 @@
+[
+  {
+    "id": 1,
+    "question": "What architecture does the Transformer use?",
+    "expected_papers": ["data1"]
+  },
+  {
+    "id": 2,
+    "question": "How does BERT perform pre-training?",
+    "expected_papers": ["data2"]
+  },
+  {
+    "id": 3,
+    "question": "What is Retrieval-Augmented Generation?",
+    "expected_papers": ["data3", "data9"]
+  },
+  {
+    "id": 4,
+    "question": "How does LoRA reduce the number of trainable parameters?",
+    "expected_papers": ["data5"]
+  },
+  {
+    "id": 5,
+    "question": "What is Chain-of-Thought prompting?",
+    "expected_papers": ["data6"]
+  },
+  {
+    "id": 6,
+    "question": "How is RLHF used to train language models?",
+    "expected_papers": ["data7"]
+  },
+  {
+    "id": 7,
+    "question": "What is SELF-RAG?",
+    "expected_papers": ["data9"]
+  },
+  {
+    "id": 8,
+    "question": "What is the main idea behind LLaMA?",
+    "expected_papers": ["data8"]
+  },
+  {
+    "id": 9,
+    "question": "What is the GPT-3 model capable of doing with few-shot learning?",
+    "expected_papers": ["data4"]
+  },
+  {
+    "id": 10,
+    "question": "Why does BERT use bidirectional representations?",
+    "expected_papers": ["data2"]
+  }
+]
